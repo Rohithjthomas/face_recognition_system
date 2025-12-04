@@ -1,0 +1,22 @@
+# Python
+*.pyc
+__pycache__/
+
+# Virtual environment
+.venv/
+.venvml/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Models
+models/*.h5
+models/*.onnx
+models/*.pt
+
+# Data
+data/processed/
+data/raw/**/*.zip
+
+# VS Code
+.vscode/
