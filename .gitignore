@@ -15,8 +15,8 @@ models/*.onnx
 models/*.pt
 
 # Data
-data/processed/
-data/raw/**/*.zip
+data/**/*.jpg
+data/**/*.jpg
 
 # VS Code
 .vscode/

@@ -48,19 +48,34 @@ def preprocess_image(input_path, output_path):
     return True
 
 
-def preprocess_folder(raw_folder, processed_folder):
-    if not os.path.exists(processed_folder):
-        os.makedirs(processed_folder)
-    for filename in os.listdir(raw_folder):
-        input_path = os.path.join(raw_folder, filename)
-        output_path = os.path.join(processed_folder, filename)
-        success = preprocess_image(input_path, output_path)
-        if success:
-            print(f"Processed {filename}")
-        else:
-            print(f"Failed to process {filename}")       
+def preprocess_all_people(raw_root="data/raw", processed_root="data/processed"):
+
+    for person_name in os.listdir(raw_root):
+        raw_folder = os.path.join(raw_root, person_name)
+        processed_folder = os.path.join(processed_root, person_name)
+
+        # skip files, accept only folders
+        if not os.path.isdir(raw_folder):
+            continue
+
+        print(f"\n Processing person: {person_name}")
+
+        if not os.path.exists(processed_folder):
+            os.makedirs(processed_folder)
+
+        # Run preprocessing for each person
+        for filename in os.listdir(raw_folder):
+            input_path = os.path.join(raw_folder, filename)
+            output_path = os.path.join(processed_folder, filename)
+
+            success = preprocess_image(input_path, output_path)
+            if success:
+                print(f" Processed {filename}")
+            else:
+                print(f" Failed {filename}")
+
 
 if __name__ == "__main__":
-    raw_folder = "data/raw/rohith"
-    processed_folder = "data/processed/rohith"
-    preprocess_folder(raw_folder, processed_folder)
+    print("\n Starting preprocessing for ALL persons...")
+    preprocess_all_people()
+    print("\n DONE — All faces processed.")
